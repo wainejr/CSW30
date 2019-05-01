@@ -27,11 +27,12 @@ architecture a_reg_bank of reg_bank is
 	end component;
 	signal reg_out0, reg_out1, reg_out2, reg_out3, 
 		reg_out4, reg_out5, reg_out6, reg_out7: unsigned(15 downto 0);
+	signal const0: unsigned(15 downto 0);
 	signal wr_en0, wr_en1, wr_en2, wr_en3, wr_en4, 
 		wr_en5, wr_en6, wr_en7: std_logic; 
 	begin
 	reg0: reg16b port map(clk=>clk, rst=>rst, wr_en=>wr_en0, 
-		data_in=>data_write, data_out=>reg_out0);
+		data_in=>const0, data_out=>reg_out0); -- reg0 always 0
 	reg1: reg16b port map(clk=>clk, rst=>rst, wr_en=>wr_en1, 
 		data_in=>data_write, data_out=>reg_out1);
 	reg2: reg16b port map(clk=>clk, rst=>rst, wr_en=>wr_en2, 
@@ -48,6 +49,8 @@ architecture a_reg_bank of reg_bank is
 		data_in=>data_write, data_out=>reg_out7);
 	
 	wr_en0 <= '1';
+	const0 <= "0000000000000000";
+	
 	wr_en1 <= '1' when wr_en='1' and mux_wr = "001" else
 			  '0';
 	wr_en2 <= '1' when wr_en='1' and mux_wr = "010" else
