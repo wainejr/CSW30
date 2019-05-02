@@ -15,7 +15,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 			sel_op : in unsigned(2 downto 0);
 			mux_rd0 : in unsigned(2 downto 0);
 			mux_rd1 : in unsigned(2 downto 0);
-			const: in unsigned (15 downto 0);
+			data_in: in signed (15 downto 0);
 			mux_const: in std_logic;
 			
 			saidapin : out signed (15 downto 0);
@@ -25,7 +25,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 	
 	signal clk, rst, wr_en, saida_bool: std_logic;
 	signal mux_wr, mux_rd0, mux_rd1, sel_op: unsigned(2 downto 0);
-	signal const: unsigned(15 downto 0);
+	signal data_in: signed(15 downto 0);
 	signal saidapin: signed(15 downto 0);
 	signal mux_const : std_logic;
 	
@@ -37,7 +37,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 								sel_op=>sel_op,
 								mux_rd0=>mux_rd0,
 								mux_rd1=>mux_rd1,
-								const=>const,
+								data_in=>data_in,
 								mux_const=>mux_const,
 								saidapin=>saidapin,
 								saida_bool=>saida_bool
@@ -66,7 +66,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 				sel_op <= "000";
 				mux_rd0 <= "000";
 				mux_rd1 <= "000";
-				const <= "0000000000000000";
+				data_in <= "0000000000000000";
 				mux_const <= '0';
 				
 				wait for 100 ns; -- soma 1 com reg0 e coloca em reg1 (1)
@@ -75,7 +75,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 				sel_op <= "000";
 				mux_rd0 <= "000";
 				mux_rd1 <= "010";
-				const <= "0000000000000001";
+				data_in <= "0000000000000001";
 				mux_const <= '1';
 				
 				wait for 100 ns; -- soma 4 com reg0 e coloca em reg2 (4)
@@ -84,7 +84,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 				sel_op <= "000";
 				mux_rd0 <= "000";
 				mux_rd1 <= "000";
-				const <= "0000000000000100";
+				data_in <= "0000000000000100";
 				mux_const <= '1';
 				
 				wait for 100 ns; -- soma reg1 e reg2 e coloca em reg3 (5)
@@ -93,7 +93,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 				sel_op <= "000";
 				mux_rd0 <= "010";
 				mux_rd1 <= "001";
-				const <= "0000000000000010";
+				data_in <= "0000000000000010";
 				mux_const <= '0';
 				
 				wait for 100 ns; -- soma reg3 e reg2 e coloca em reg3 (9)
@@ -102,7 +102,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 				sel_op <= "000";
 				mux_rd0 <= "010";
 				mux_rd1 <= "011";
-				const <= "0000000000000010";
+				data_in <= "0000000000000010";
 				mux_const <= '0';
 				
 		end process;
