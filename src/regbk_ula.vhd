@@ -11,7 +11,7 @@ entity regbk_ula is
 		sel_op : in unsigned(2 downto 0);
 		mux_rd0 : in unsigned(2 downto 0);
 		mux_rd1 : in unsigned(2 downto 0);
-		data_in: in unsigned (15 downto 0);
+		data_in: in signed (15 downto 0);
 		mux_const: in std_logic;
 		
 		saidapin : out signed (15 downto 0);
@@ -28,9 +28,9 @@ architecture a_regbk_ula of regbk_ula is
 			mux_wr : in unsigned(2 downto 0);
 			mux_rd0 : in unsigned(2 downto 0);
 			mux_rd1 : in unsigned(2 downto 0);
-			data_out0 : out unsigned(15 downto 0);
-			data_out1 : out unsigned(15 downto 0);
-			data_write : in unsigned(15 downto 0)
+			data_out0 : out signed(15 downto 0);
+			data_out1 : out signed(15 downto 0);
+			data_write : in signed(15 downto 0)
 		);
 	end component;
 	
@@ -42,7 +42,7 @@ architecture a_regbk_ula of regbk_ula is
 	);
 	end component;
 	signal entr0, entr1: signed(15 downto 0);
-	signal data_out0, data_out1, data_write: unsigned(15 downto 0);
+	signal data_out0, data_out1, data_write: signed(15 downto 0);
 	signal saida : signed(15 downto 0);
 	
 	begin
@@ -52,7 +52,7 @@ architecture a_regbk_ula of regbk_ula is
 							   mux_wr=>mux_wr,
 							   mux_rd0=>mux_rd0,
 							   mux_rd1=>mux_rd1,
-							   data_write=>data_write,
+							   data_write=>saida,
 							   data_out0=>data_out0,
 							   data_out1=>data_out1
 							   );
@@ -64,13 +64,10 @@ architecture a_regbk_ula of regbk_ula is
 						  saida_bool => saida_bool
 						  );		  
 						  
-		saidapin <= saida;					
-		data_write <= unsigned(saida);
-		data_out0 <= data_out0;
-		data_out1 <= data_out1;	
-		entr0 <= signed(data_out0);
-		entr1 <= signed(data_out1) when mux_const = '0' else
-				 signed(const)	   when mux_const = '1' else
+		saidapin <= saida;
+		entr0 <= data_out0;
+		entr1 <= data_out1 when mux_const = '0' else
+				 data_in   when mux_const = '1' else
 				 "0000000000000000";
 
 end architecture;

@@ -10,12 +10,12 @@ architecture a_reg16b_tb of reg16b_tb is
 		port( clk : in std_logic;
 			   rst : in std_logic;
 			   wr_en : in std_logic;
-			   data_in : in unsigned(15 downto 0);
-			   data_out : out unsigned(15 downto 0)
+			   data_in : in signed(15 downto 0);
+			   data_out : out signed(15 downto 0)
 		);
 	end component;
 	signal clk,rst,wr_en: std_logic;
-	signal data_in,data_out: unsigned (15 downto 0);
+	signal data_in,data_out: signed (15 downto 0);
 	begin
 		uut: reg16b port map (clk=>clk,
 							   rst=>rst,

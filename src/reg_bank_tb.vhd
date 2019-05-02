@@ -14,15 +14,15 @@ architecture a_reg_bank_tb of reg_bank_tb is
 			mux_wr : in unsigned(2 downto 0);
 			mux_rd0 : in unsigned(2 downto 0);
 			mux_rd1 : in unsigned(2 downto 0);
-			data_out0 : out unsigned(15 downto 0);
-			data_out1 : out unsigned(15 downto 0);
-			data_write : in unsigned(15 downto 0)
+			data_out0 : out signed(15 downto 0);
+			data_out1 : out signed(15 downto 0);
+			data_write : in signed(15 downto 0)
 		);
 	end component;
 	
 	signal clk, rst, wr_en: std_logic;
 	signal mux_wr, mux_rd0, mux_rd1: unsigned(2 downto 0);
-	signal data_write, data_out0, data_out1: unsigned(15 downto 0);
+	signal data_write, data_out0, data_out1: signed(15 downto 0);
 	
 	begin
 		uut: reg_bank port map (clk=>clk,

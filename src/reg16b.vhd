@@ -5,14 +5,14 @@ entity reg16b is
 	port( clk : in std_logic;
 	rst : in std_logic;
 	wr_en : in std_logic;
-	data_in : in unsigned(15 downto 0);
-	data_out : out unsigned(15 downto 0)
+	data_in : in signed(15 downto 0);
+	data_out : out signed(15 downto 0)
 	 );
 end entity;
 
 architecture a_reg16b of reg16b is
 
-signal registro: unsigned(15 downto 0);	
+signal registro: signed(15 downto 0);	
 begin
 
 	process(clk,rst,wr_en) -- acionado se houver mudança em clk, rst ou wr_en

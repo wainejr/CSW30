@@ -10,9 +10,9 @@ entity reg_bank is
 		mux_wr : in unsigned(2 downto 0);
 		mux_rd0 : in unsigned(2 downto 0);
 		mux_rd1 : in unsigned(2 downto 0);
-		data_out0 : out unsigned(15 downto 0);
-		data_out1 : out unsigned(15 downto 0);
-		data_write : in unsigned(15 downto 0)
+		data_out0 : out signed(15 downto 0);
+		data_out1 : out signed(15 downto 0);
+		data_write : in signed(15 downto 0)
 	);
 end entity;
 
@@ -21,13 +21,13 @@ architecture a_reg_bank of reg_bank is
 		port( clk : in std_logic;
 			rst : in std_logic;
 			wr_en : in std_logic;
-			data_in : in unsigned(15 downto 0);
-			data_out : out unsigned(15 downto 0)
+			data_in : in signed(15 downto 0);
+			data_out : out signed(15 downto 0)
 		);
 	end component;
 	signal reg_out0, reg_out1, reg_out2, reg_out3, 
-		reg_out4, reg_out5, reg_out6, reg_out7: unsigned(15 downto 0);
-	signal const0: unsigned(15 downto 0);
+		reg_out4, reg_out5, reg_out6, reg_out7: signed(15 downto 0);
+	signal const0: signed(15 downto 0);
 	signal wr_en0, wr_en1, wr_en2, wr_en3, wr_en4, 
 		wr_en5, wr_en6, wr_en7: std_logic; 
 	begin
