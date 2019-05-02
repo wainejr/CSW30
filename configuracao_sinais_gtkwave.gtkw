@@ -1,0 +1,51 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Thu May 02 00:12:57 2019
+[*]
+[dumpfile] "C:\Users\edu_y\OneDrive\Documentos\Engenharia\5 periodo\Arq. Comp\csw30-microproc\src\rbk.ghw"
+[dumpfile_mtime] "Thu May 02 00:07:58 2019"
+[dumpfile_size] 8153
+[savefile] "C:\Users\edu_y\OneDrive\Documentos\Engenharia\5 periodo\Arq. Comp\csw30-microproc\configuracao_sinais_gtkwave.gtkw"
+[timestart] 0
+[size] 1366 705
+[pos] -1 -1
+*-26.932577 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.regbk_ula_tb.
+[treeopen] top.regbk_ula_tb.uut.
+[treeopen] top.regbk_ula_tb.uut.regb.
+[treeopen] top.regbk_ula_tb.uut.ulab.
+[sst_width] 197
+[signals_width] 142
+[sst_expanded] 1
+[sst_vpaned_height] 179
+@28
+top.regbk_ula_tb.clk
+top.regbk_ula_tb.rst
+top.regbk_ula_tb.wr_en
+top.regbk_ula_tb.saida_bool
+top.regbk_ula_tb.mux_const
+@22
+#{top.regbk_ula_tb.saidapin[15:0]} top.regbk_ula_tb.saidapin[15] top.regbk_ula_tb.saidapin[14] top.regbk_ula_tb.saidapin[13] top.regbk_ula_tb.saidapin[12] top.regbk_ula_tb.saidapin[11] top.regbk_ula_tb.saidapin[10] top.regbk_ula_tb.saidapin[9] top.regbk_ula_tb.saidapin[8] top.regbk_ula_tb.saidapin[7] top.regbk_ula_tb.saidapin[6] top.regbk_ula_tb.saidapin[5] top.regbk_ula_tb.saidapin[4] top.regbk_ula_tb.saidapin[3] top.regbk_ula_tb.saidapin[2] top.regbk_ula_tb.saidapin[1] top.regbk_ula_tb.saidapin[0]
+#{top.regbk_ula_tb.const[15:0]} top.regbk_ula_tb.const[15] top.regbk_ula_tb.const[14] top.regbk_ula_tb.const[13] top.regbk_ula_tb.const[12] top.regbk_ula_tb.const[11] top.regbk_ula_tb.const[10] top.regbk_ula_tb.const[9] top.regbk_ula_tb.const[8] top.regbk_ula_tb.const[7] top.regbk_ula_tb.const[6] top.regbk_ula_tb.const[5] top.regbk_ula_tb.const[4] top.regbk_ula_tb.const[3] top.regbk_ula_tb.const[2] top.regbk_ula_tb.const[1] top.regbk_ula_tb.const[0]
+@28
+#{top.regbk_ula_tb.sel_op[2:0]} top.regbk_ula_tb.sel_op[2] top.regbk_ula_tb.sel_op[1] top.regbk_ula_tb.sel_op[0]
+#{top.regbk_ula_tb.mux_wr[2:0]} top.regbk_ula_tb.mux_wr[2] top.regbk_ula_tb.mux_wr[1] top.regbk_ula_tb.mux_wr[0]
+#{top.regbk_ula_tb.mux_rd0[2:0]} top.regbk_ula_tb.mux_rd0[2] top.regbk_ula_tb.mux_rd0[1] top.regbk_ula_tb.mux_rd0[0]
+#{top.regbk_ula_tb.mux_rd1[2:0]} top.regbk_ula_tb.mux_rd1[2] top.regbk_ula_tb.mux_rd1[1] top.regbk_ula_tb.mux_rd1[0]
+@22
+#{top.regbk_ula_tb.uut.ulab.saida[15:0]} top.regbk_ula_tb.uut.ulab.saida[15] top.regbk_ula_tb.uut.ulab.saida[14] top.regbk_ula_tb.uut.ulab.saida[13] top.regbk_ula_tb.uut.ulab.saida[12] top.regbk_ula_tb.uut.ulab.saida[11] top.regbk_ula_tb.uut.ulab.saida[10] top.regbk_ula_tb.uut.ulab.saida[9] top.regbk_ula_tb.uut.ulab.saida[8] top.regbk_ula_tb.uut.ulab.saida[7] top.regbk_ula_tb.uut.ulab.saida[6] top.regbk_ula_tb.uut.ulab.saida[5] top.regbk_ula_tb.uut.ulab.saida[4] top.regbk_ula_tb.uut.ulab.saida[3] top.regbk_ula_tb.uut.ulab.saida[2] top.regbk_ula_tb.uut.ulab.saida[1] top.regbk_ula_tb.uut.ulab.saida[0]
+#{top.regbk_ula_tb.uut.ulab.entr0[15:0]} top.regbk_ula_tb.uut.ulab.entr0[15] top.regbk_ula_tb.uut.ulab.entr0[14] top.regbk_ula_tb.uut.ulab.entr0[13] top.regbk_ula_tb.uut.ulab.entr0[12] top.regbk_ula_tb.uut.ulab.entr0[11] top.regbk_ula_tb.uut.ulab.entr0[10] top.regbk_ula_tb.uut.ulab.entr0[9] top.regbk_ula_tb.uut.ulab.entr0[8] top.regbk_ula_tb.uut.ulab.entr0[7] top.regbk_ula_tb.uut.ulab.entr0[6] top.regbk_ula_tb.uut.ulab.entr0[5] top.regbk_ula_tb.uut.ulab.entr0[4] top.regbk_ula_tb.uut.ulab.entr0[3] top.regbk_ula_tb.uut.ulab.entr0[2] top.regbk_ula_tb.uut.ulab.entr0[1] top.regbk_ula_tb.uut.ulab.entr0[0]
+#{top.regbk_ula_tb.uut.ulab.entr1[15:0]} top.regbk_ula_tb.uut.ulab.entr1[15] top.regbk_ula_tb.uut.ulab.entr1[14] top.regbk_ula_tb.uut.ulab.entr1[13] top.regbk_ula_tb.uut.ulab.entr1[12] top.regbk_ula_tb.uut.ulab.entr1[11] top.regbk_ula_tb.uut.ulab.entr1[10] top.regbk_ula_tb.uut.ulab.entr1[9] top.regbk_ula_tb.uut.ulab.entr1[8] top.regbk_ula_tb.uut.ulab.entr1[7] top.regbk_ula_tb.uut.ulab.entr1[6] top.regbk_ula_tb.uut.ulab.entr1[5] top.regbk_ula_tb.uut.ulab.entr1[4] top.regbk_ula_tb.uut.ulab.entr1[3] top.regbk_ula_tb.uut.ulab.entr1[2] top.regbk_ula_tb.uut.ulab.entr1[1] top.regbk_ula_tb.uut.ulab.entr1[0]
+#{top.regbk_ula_tb.uut.regb.reg_out0[15:0]} top.regbk_ula_tb.uut.regb.reg_out0[15] top.regbk_ula_tb.uut.regb.reg_out0[14] top.regbk_ula_tb.uut.regb.reg_out0[13] top.regbk_ula_tb.uut.regb.reg_out0[12] top.regbk_ula_tb.uut.regb.reg_out0[11] top.regbk_ula_tb.uut.regb.reg_out0[10] top.regbk_ula_tb.uut.regb.reg_out0[9] top.regbk_ula_tb.uut.regb.reg_out0[8] top.regbk_ula_tb.uut.regb.reg_out0[7] top.regbk_ula_tb.uut.regb.reg_out0[6] top.regbk_ula_tb.uut.regb.reg_out0[5] top.regbk_ula_tb.uut.regb.reg_out0[4] top.regbk_ula_tb.uut.regb.reg_out0[3] top.regbk_ula_tb.uut.regb.reg_out0[2] top.regbk_ula_tb.uut.regb.reg_out0[1] top.regbk_ula_tb.uut.regb.reg_out0[0]
+#{top.regbk_ula_tb.uut.regb.reg_out1[15:0]} top.regbk_ula_tb.uut.regb.reg_out1[15] top.regbk_ula_tb.uut.regb.reg_out1[14] top.regbk_ula_tb.uut.regb.reg_out1[13] top.regbk_ula_tb.uut.regb.reg_out1[12] top.regbk_ula_tb.uut.regb.reg_out1[11] top.regbk_ula_tb.uut.regb.reg_out1[10] top.regbk_ula_tb.uut.regb.reg_out1[9] top.regbk_ula_tb.uut.regb.reg_out1[8] top.regbk_ula_tb.uut.regb.reg_out1[7] top.regbk_ula_tb.uut.regb.reg_out1[6] top.regbk_ula_tb.uut.regb.reg_out1[5] top.regbk_ula_tb.uut.regb.reg_out1[4] top.regbk_ula_tb.uut.regb.reg_out1[3] top.regbk_ula_tb.uut.regb.reg_out1[2] top.regbk_ula_tb.uut.regb.reg_out1[1] top.regbk_ula_tb.uut.regb.reg_out1[0]
+#{top.regbk_ula_tb.uut.regb.reg_out2[15:0]} top.regbk_ula_tb.uut.regb.reg_out2[15] top.regbk_ula_tb.uut.regb.reg_out2[14] top.regbk_ula_tb.uut.regb.reg_out2[13] top.regbk_ula_tb.uut.regb.reg_out2[12] top.regbk_ula_tb.uut.regb.reg_out2[11] top.regbk_ula_tb.uut.regb.reg_out2[10] top.regbk_ula_tb.uut.regb.reg_out2[9] top.regbk_ula_tb.uut.regb.reg_out2[8] top.regbk_ula_tb.uut.regb.reg_out2[7] top.regbk_ula_tb.uut.regb.reg_out2[6] top.regbk_ula_tb.uut.regb.reg_out2[5] top.regbk_ula_tb.uut.regb.reg_out2[4] top.regbk_ula_tb.uut.regb.reg_out2[3] top.regbk_ula_tb.uut.regb.reg_out2[2] top.regbk_ula_tb.uut.regb.reg_out2[1] top.regbk_ula_tb.uut.regb.reg_out2[0]
+#{top.regbk_ula_tb.uut.regb.reg_out3[15:0]} top.regbk_ula_tb.uut.regb.reg_out3[15] top.regbk_ula_tb.uut.regb.reg_out3[14] top.regbk_ula_tb.uut.regb.reg_out3[13] top.regbk_ula_tb.uut.regb.reg_out3[12] top.regbk_ula_tb.uut.regb.reg_out3[11] top.regbk_ula_tb.uut.regb.reg_out3[10] top.regbk_ula_tb.uut.regb.reg_out3[9] top.regbk_ula_tb.uut.regb.reg_out3[8] top.regbk_ula_tb.uut.regb.reg_out3[7] top.regbk_ula_tb.uut.regb.reg_out3[6] top.regbk_ula_tb.uut.regb.reg_out3[5] top.regbk_ula_tb.uut.regb.reg_out3[4] top.regbk_ula_tb.uut.regb.reg_out3[3] top.regbk_ula_tb.uut.regb.reg_out3[2] top.regbk_ula_tb.uut.regb.reg_out3[1] top.regbk_ula_tb.uut.regb.reg_out3[0]
+#{top.regbk_ula_tb.uut.regb.reg_out4[15:0]} top.regbk_ula_tb.uut.regb.reg_out4[15] top.regbk_ula_tb.uut.regb.reg_out4[14] top.regbk_ula_tb.uut.regb.reg_out4[13] top.regbk_ula_tb.uut.regb.reg_out4[12] top.regbk_ula_tb.uut.regb.reg_out4[11] top.regbk_ula_tb.uut.regb.reg_out4[10] top.regbk_ula_tb.uut.regb.reg_out4[9] top.regbk_ula_tb.uut.regb.reg_out4[8] top.regbk_ula_tb.uut.regb.reg_out4[7] top.regbk_ula_tb.uut.regb.reg_out4[6] top.regbk_ula_tb.uut.regb.reg_out4[5] top.regbk_ula_tb.uut.regb.reg_out4[4] top.regbk_ula_tb.uut.regb.reg_out4[3] top.regbk_ula_tb.uut.regb.reg_out4[2] top.regbk_ula_tb.uut.regb.reg_out4[1] top.regbk_ula_tb.uut.regb.reg_out4[0]
+#{top.regbk_ula_tb.uut.regb.reg_out5[15:0]} top.regbk_ula_tb.uut.regb.reg_out5[15] top.regbk_ula_tb.uut.regb.reg_out5[14] top.regbk_ula_tb.uut.regb.reg_out5[13] top.regbk_ula_tb.uut.regb.reg_out5[12] top.regbk_ula_tb.uut.regb.reg_out5[11] top.regbk_ula_tb.uut.regb.reg_out5[10] top.regbk_ula_tb.uut.regb.reg_out5[9] top.regbk_ula_tb.uut.regb.reg_out5[8] top.regbk_ula_tb.uut.regb.reg_out5[7] top.regbk_ula_tb.uut.regb.reg_out5[6] top.regbk_ula_tb.uut.regb.reg_out5[5] top.regbk_ula_tb.uut.regb.reg_out5[4] top.regbk_ula_tb.uut.regb.reg_out5[3] top.regbk_ula_tb.uut.regb.reg_out5[2] top.regbk_ula_tb.uut.regb.reg_out5[1] top.regbk_ula_tb.uut.regb.reg_out5[0]
+#{top.regbk_ula_tb.uut.regb.reg_out6[15:0]} top.regbk_ula_tb.uut.regb.reg_out6[15] top.regbk_ula_tb.uut.regb.reg_out6[14] top.regbk_ula_tb.uut.regb.reg_out6[13] top.regbk_ula_tb.uut.regb.reg_out6[12] top.regbk_ula_tb.uut.regb.reg_out6[11] top.regbk_ula_tb.uut.regb.reg_out6[10] top.regbk_ula_tb.uut.regb.reg_out6[9] top.regbk_ula_tb.uut.regb.reg_out6[8] top.regbk_ula_tb.uut.regb.reg_out6[7] top.regbk_ula_tb.uut.regb.reg_out6[6] top.regbk_ula_tb.uut.regb.reg_out6[5] top.regbk_ula_tb.uut.regb.reg_out6[4] top.regbk_ula_tb.uut.regb.reg_out6[3] top.regbk_ula_tb.uut.regb.reg_out6[2] top.regbk_ula_tb.uut.regb.reg_out6[1] top.regbk_ula_tb.uut.regb.reg_out6[0]
+#{top.regbk_ula_tb.uut.regb.reg_out7[15:0]} top.regbk_ula_tb.uut.regb.reg_out7[15] top.regbk_ula_tb.uut.regb.reg_out7[14] top.regbk_ula_tb.uut.regb.reg_out7[13] top.regbk_ula_tb.uut.regb.reg_out7[12] top.regbk_ula_tb.uut.regb.reg_out7[11] top.regbk_ula_tb.uut.regb.reg_out7[10] top.regbk_ula_tb.uut.regb.reg_out7[9] top.regbk_ula_tb.uut.regb.reg_out7[8] top.regbk_ula_tb.uut.regb.reg_out7[7] top.regbk_ula_tb.uut.regb.reg_out7[6] top.regbk_ula_tb.uut.regb.reg_out7[5] top.regbk_ula_tb.uut.regb.reg_out7[4] top.regbk_ula_tb.uut.regb.reg_out7[3] top.regbk_ula_tb.uut.regb.reg_out7[2] top.regbk_ula_tb.uut.regb.reg_out7[1] top.regbk_ula_tb.uut.regb.reg_out7[0]
+@23
+#{top.regbk_ula_tb.uut.regb.const0[15:0]} top.regbk_ula_tb.uut.regb.const0[15] top.regbk_ula_tb.uut.regb.const0[14] top.regbk_ula_tb.uut.regb.const0[13] top.regbk_ula_tb.uut.regb.const0[12] top.regbk_ula_tb.uut.regb.const0[11] top.regbk_ula_tb.uut.regb.const0[10] top.regbk_ula_tb.uut.regb.const0[9] top.regbk_ula_tb.uut.regb.const0[8] top.regbk_ula_tb.uut.regb.const0[7] top.regbk_ula_tb.uut.regb.const0[6] top.regbk_ula_tb.uut.regb.const0[5] top.regbk_ula_tb.uut.regb.const0[4] top.regbk_ula_tb.uut.regb.const0[3] top.regbk_ula_tb.uut.regb.const0[2] top.regbk_ula_tb.uut.regb.const0[1] top.regbk_ula_tb.uut.regb.const0[0]
+[pattern_trace] 1
+[pattern_trace] 0
