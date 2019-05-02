@@ -11,7 +11,7 @@ entity regbk_ula is
 		sel_op : in unsigned(2 downto 0);
 		mux_rd0 : in unsigned(2 downto 0);
 		mux_rd1 : in unsigned(2 downto 0);
-		const: in unsigned (15 downto 0);
+		data_in: in unsigned (15 downto 0);
 		mux_const: in std_logic;
 		
 		saidapin : out signed (15 downto 0);
@@ -62,8 +62,7 @@ architecture a_regbk_ula of regbk_ula is
 						  saida => saida,
 						  sel_op => sel_op,
 						  saida_bool => saida_bool
-						  );
-						  
+						  );		  
 						  
 		saidapin <= saida;					
 		data_write <= unsigned(saida);

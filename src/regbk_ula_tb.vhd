@@ -46,21 +46,21 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 		process -- sinal de clock
 			begin
 				clk <= '0';
-				wait for 100 ns;
+				wait for 50 ns;
 				clk <= '1';
-				wait for 100 ns;
+				wait for 50 ns;
 		end process;
 
 		process -- sinal de reset
 			begin
 				rst <= '1';
-				wait for 100 ns;
+				wait for 75 ns;
 				rst <= '0';
 				wait;
 		end process;
 		process -- sinais dos casos de teste
 			begin
-				wait for 50 ns; --em reset ainda
+				wait for 100 ns; -- em reset ainda
 				wr_en <= '0';
 				mux_wr <= "000";
 				sel_op <= "000";
@@ -69,30 +69,39 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
 				const <= "0000000000000000";
 				mux_const <= '0';
 				
-				wait for 100 ns; -- carrega um na entrada 01 da ula
-				wr_en <= '0';
-				mux_wr <= "000";
+				wait for 100 ns; -- soma 1 com reg0 e coloca em reg1 (1)
+				wr_en <= '1';
+				mux_wr <= "001";
 				sel_op <= "000";
 				mux_rd0 <= "000";
 				mux_rd1 <= "010";
 				const <= "0000000000000001";
 				mux_const <= '1';
 				
-				wait for 100 ns; -- carrega 0 na entrada 00 da ula
+				wait for 100 ns; -- soma 4 com reg0 e coloca em reg2 (4)
 				wr_en <= '1';
-				mux_wr <= "000";
-				sel_op <= "000";
-				mux_rd0 <= "000";
-				mux_rd1 <= "001";
-				const <= "0000000000000100";
-				mux_const <= '1';
-				
-				wait for 100 ns; -- sem escrever nada
-				wr_en <= '0';
-				mux_wr <= "000";
+				mux_wr <= "010";
 				sel_op <= "000";
 				mux_rd0 <= "000";
 				mux_rd1 <= "000";
+				const <= "0000000000000100";
+				mux_const <= '1';
+				
+				wait for 100 ns; -- soma reg1 e reg2 e coloca em reg3 (5)
+				wr_en <= '1';
+				mux_wr <= "011";
+				sel_op <= "000";
+				mux_rd0 <= "010";
+				mux_rd1 <= "001";
+				const <= "0000000000000010";
+				mux_const <= '0';
+				
+				wait for 100 ns; -- soma reg3 e reg2 e coloca em reg3 (9)
+				wr_en <= '1';
+				mux_wr <= "011";
+				sel_op <= "000";
+				mux_rd0 <= "010";
+				mux_rd1 <= "011";
 				const <= "0000000000000010";
 				mux_const <= '0';
 				
