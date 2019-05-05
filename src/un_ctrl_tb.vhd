@@ -9,13 +9,13 @@ architecture a_un_ctrl_tb of un_ctrl_tb is
     component un_ctrl
 		port(clk : in std_logic;
 			 rst : in std_logic;
-			 end_mem : out signed(15 downto 0);
-			 instr : in unsigned(17 downto 0)
+			 end_mem : out unsigned(6 downto 0);
+			 instr : out unsigned(17 downto 0)
 			);
     end component;
 
     signal clk,rst: std_logic;
-    signal end_mem: signed (15 downto 0);
+    signal end_mem: unsigned (6 downto 0);
     signal instr: unsigned(17 downto 0);
 	
 	begin
