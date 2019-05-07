@@ -1,7 +1,7 @@
 rm -f *.obj
 
 ghdl -a maq_est.vhd
-ghdl -a reg16b.vhd
+ghdl -a prog_count.vhd
 ghdl -a rom.vhd
 ghdl -a un_ctrl.vhd
 ghdl -a un_ctrl_tb.vhd
