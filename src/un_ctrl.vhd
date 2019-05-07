@@ -12,12 +12,12 @@ end entity;
 
 architecture a_un_ctrl of un_ctrl is
 	
-	component reg16b
+	component prog_count
 		port(clk : in std_logic;
 			 rst : in std_logic;
 			 wr_en : in std_logic;
-			 data_in : in signed(15 downto 0);
-			 data_out : out signed(15 downto 0)
+			 data_in : in unsigned(6 downto 0);
+			 data_out : out unsigned(6 downto 0)
     );
 	end component;
 	
@@ -36,16 +36,15 @@ architecture a_un_ctrl of un_ctrl is
 	end component;
 	
 	signal wr_en : std_logic;
-	signal data_in, data_out : signed(15 downto 0); -- PC
+	signal data_in, data_out : unsigned(6 downto 0); -- PC
 	signal opcode : unsigned(5 downto 0); -- tamanho do opcode
 	signal end_rom : unsigned(6 downto 0);
 	signal instr_sig : unsigned(17 downto 0);
 	signal estado : std_logic;
 	signal jump_abs_en, jump_rel_en : std_logic; -- jump absoluto e relativo
-	signal abs_value: unsigned(6 downto 0);
 	
 	begin
-		PC : reg16b port map(clk=>clk,
+		PC : prog_count port map(clk=>clk,
 							 rst=>rst,
 							 wr_en=>wr_en,
 							 data_in=>data_in,
@@ -64,7 +63,7 @@ architecture a_un_ctrl of un_ctrl is
 		end_mem <= end_rom; -- debug
 		instr <= instr_sig; -- debug
 		
-		end_rom <= unsigned(data_out(6 downto 0));
+		end_rom <= data_out;
 		opcode <= instr_sig(17 downto 12); -- opcode nos 6 MSB
 		 
 		
@@ -73,8 +72,8 @@ architecture a_un_ctrl of un_ctrl is
 		
 		
 		data_in <= data_out+1 when jump_abs_en='0' else
-				   resize(signed(abs_value), 16); -- enere?o absoluto nos 7 LSB
-		abs_value <= instr_sig(6 downto 0);
+				   instr_sig(6 downto 0) when jump_abs_en='1' else -- endere?o absoluto nos 7 LSB
+				   "0000000"; 
 		
 		
 		wr_en <= '1' when estado = '1' else
