@@ -13,9 +13,12 @@ entity regbk_ula is
         mux_rd1 : in unsigned(2 downto 0);
         data_in: in signed (15 downto 0);
         mux_const: in std_logic;
-        
+        -- saidas ULA
         saidapin : out signed (15 downto 0);
-        saida_bool : out std_logic
+        saida_bool : out std_logic;
+		-- valores em reg0 e reg1
+		data_reg0 : out signed (15 downto 0);
+		data_reg1 : out signed (15 downto 0)
     );
 end entity;
 
@@ -69,5 +72,8 @@ architecture a_regbk_ula of regbk_ula is
         entr1 <= data_out1 when mux_const = '0' else
                  data_in   when mux_const = '1' else
                  "0000000000000000";
+		
+		data_reg0 <= data_out0;
+		data_reg1 <= data_out1;
 
 end architecture;

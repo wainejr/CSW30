@@ -6,7 +6,9 @@ entity un_ctrl is
     port(clk : in std_logic;
 		 rst : in std_logic;
 		 end_mem : out unsigned(6 downto 0);
-		 instr : out unsigned(17 downto 0)
+		 instr : out unsigned(17 downto 0);
+		 estado: out std_logic;
+		 opcode : out unsigned(3 downto 0) -- tamanho do opcode
 		);
 end entity;
 
@@ -37,10 +39,10 @@ architecture a_un_ctrl of un_ctrl is
 	
 	signal wr_en : std_logic;
 	signal data_in, data_out : unsigned(6 downto 0); -- PC
-	signal opcode : unsigned(5 downto 0); -- tamanho do opcode
-	signal end_rom : unsigned(6 downto 0);
-	signal instr_sig : unsigned(17 downto 0);
-	signal estado : std_logic;
+	signal end_mem_s : unsigned(6 downto 0);
+	signal instr_s : unsigned(17 downto 0);
+	signal opcode_s : unsigned(3 downto 0); -- tamanho do opcode
+	signal estado_s : std_logic;
 	signal jump_abs_en, jump_rel_en : std_logic; -- jump absoluto e relativo
 	
 	begin
@@ -52,32 +54,31 @@ architecture a_un_ctrl of un_ctrl is
 		);
 		
 		mem_rom : rom port map(	clk=>clk,
-								endereco=>end_rom,
-								dado=>instr_sig
+								endereco=>end_mem_s,
+								dado=>instr_s
 		);
 		mq_est : maq_est port map(	clk => clk,
 									rst => rst,
-									estado => estado
+									estado => estado_s
 		);
 		
-		end_mem <= end_rom; -- debug
-		instr <= instr_sig; -- debug
+		end_mem <= end_mem_s;
+		instr <= instr_s;
+		estado <= estado_s;
+		opcode <= opcode_s;
+
+		end_mem_s <= data_out;
+		opcode_s <= instr_s(17 downto 14); -- opcode nos 4 MSB
 		
-		end_rom <= data_out;
-		opcode <= instr_sig(17 downto 12); -- opcode nos 6 MSB
-		 
-		
-		jump_abs_en <= '1' when opcode = "111111" else
+		jump_abs_en <= '1' when opcode_s = "1111" else
 					   '0';
 		
-		
 		data_in <= data_out+1 when jump_abs_en='0' else
-				   instr_sig(6 downto 0) when jump_abs_en='1' else -- endere?o absoluto nos 7 LSB
+				   instr_s(6 downto 0) when jump_abs_en='1' else -- endereco absoluto nos 7 LSB
 				   "0000000"; 
 		
-		
-		wr_en <= '1' when estado = '1' else
-				 '0' when estado = '0' else
-				 '0'; -- 0->fetch, 1->decode/execute
+		wr_en <= '1' when estado_s = '1' else
+				 '0' when estado_s = '0' else
+				 '0'; -- 1->fetch, 0->decode/execute
 		
 end architecture;

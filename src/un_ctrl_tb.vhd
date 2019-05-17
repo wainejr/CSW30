@@ -10,7 +10,9 @@ architecture a_un_ctrl_tb of un_ctrl_tb is
 		port(clk : in std_logic;
 			 rst : in std_logic;
 			 end_mem : out unsigned(6 downto 0);
-			 instr : out unsigned(17 downto 0)
+			 instr : out unsigned(17 downto 0);
+			 estado: out std_logic;
+			 opcode : out unsigned(3 downto 0) -- tamanho do opcode
 			);
     end component;
 
@@ -40,7 +42,7 @@ architecture a_un_ctrl_tb of un_ctrl_tb is
                 wait;
         end process;
         
-		process -- teste (apenas constando)
+		process -- teste (apenas contando)
             begin
 				wait for 3000 ns;
 		end process;

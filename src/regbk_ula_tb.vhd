@@ -19,7 +19,10 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
             mux_const: in std_logic;
             
             saidapin : out signed (15 downto 0);
-            saida_bool : out std_logic
+            saida_bool : out std_logic;
+			
+			data_reg0 : out signed (15 downto 0);
+			data_reg1 : out signed (15 downto 0)
         );
     end component;
     
