@@ -57,13 +57,14 @@ architecture a_uctrl_regbk of uctrl_regbk is
 	signal mux_const : std_logic;
 	
 	signal instr_s : unsigned(17 downto 0);
+	signal estado_s : std_logic;
 	begin 
 		ctrl: un_ctrl port map(
 						clk => clk,
 						rst => rst,
 						end_mem => end_mem,
 						instr => instr_s,
-						estado => estado,
+						estado => estado_s,
 						opcode => opcode
 		);
 		
@@ -84,8 +85,10 @@ architecture a_uctrl_regbk of uctrl_regbk is
 		);
 		
 		instr <= instr_s;
+		estado <= estado_s;
 		
-		wr_en <= '0' when opcode = "1111" else -- provisório (apenas p/ n escrever no jump)
+		wr_en <= '0' when estado_s = '0' else -- não escreve no estado 0
+				 '0' when opcode = "1111" else -- provisório (n escreve apenas no jump)
 				 '1';
 		
 		mux_rd0 <= instr_s(13 downto 11);
@@ -93,7 +96,7 @@ architecture a_uctrl_regbk of uctrl_regbk is
 		sel_op <= instr_s(2 downto 0);
 		
 		mux_const <= '0' when opcode = "0000" else -- instruçoes com 2 regs tem opcode 0000
-					 '1';
-					 
-		data_in <= resize(signed(instr_s(10 downto 3)), 16);
+					 '1';					 
+		data_in <= resize(signed(instr_s(10 downto 3)), 16); -- constante em [10-3]
+		
 end architecture;

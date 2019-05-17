@@ -1,2 +1,2 @@
-*.vhd: source file
-*_tb.vhd: testbench file
+*.vhd: source files
+*_tb.vhd: testbench files
