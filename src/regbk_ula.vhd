@@ -13,12 +13,14 @@ entity regbk_ula is
         mux_rd1 : in unsigned(2 downto 0);
         data_in: in signed (15 downto 0);
         mux_const: in std_logic;
+        PC_in: in unsigned(6 downto 0);
+        mux_PC: in std_logic;
         -- saidas ULA
         saidapin : out signed (15 downto 0);
         saida_bool : out std_logic;
-		-- valores em reg0 e reg1
-		data_reg0 : out signed (15 downto 0);
-		data_reg1 : out signed (15 downto 0)
+        -- valores em reg0 e reg1
+        data_reg0 : out signed (15 downto 0);
+        data_reg1 : out signed (15 downto 0)
     );
 end entity;
 
@@ -38,7 +40,7 @@ architecture a_regbk_ula of regbk_ula is
     end component;
     
     component ula is 
-    port (    entr0,entr1  : in signed (15 downto 0);
+    port (  entr0,entr1  : in signed (15 downto 0);
             sel_op : in unsigned (2 downto 0);
             saida : out signed (15 downto 0);
             saida_bool : out std_logic
@@ -47,7 +49,7 @@ architecture a_regbk_ula of regbk_ula is
     signal entr0, entr1: signed(15 downto 0);
     signal data_out0, data_out1, data_write: signed(15 downto 0);
     signal saida : signed(15 downto 0);
-    
+
     begin
         regb: reg_bank port map (clk=>clk,
                                rst=>rst,
@@ -68,11 +70,13 @@ architecture a_regbk_ula of regbk_ula is
                           );          
                           
         saidapin <= saida;
-        entr0 <= data_out0;
+        entr0 <= data_out0 when mux_PC = '0' else
+				 resize(signed(PC_in), 16) when mux_PC = '1' else
+				 "0000000000000000";
         entr1 <= data_out1 when mux_const = '0' else
                  data_in   when mux_const = '1' else
                  "0000000000000000";
-		
+
 		data_reg0 <= data_out0;
 		data_reg1 <= data_out1;
 

@@ -4,8 +4,11 @@ use ieee.numeric_std.all;
 
 entity un_ctrl is
     port(clk : in std_logic;
-		 rst : in std_logic;
-		 end_mem : out unsigned(6 downto 0);
+        rst : in std_logic;
+         wr_end_mem : in std_logic; -- escrever endereço absoluto de memória
+         end_mem_in : in unsigned(6 downto 0);
+
+         end_mem : out unsigned(6 downto 0);
 		 instr : out unsigned(17 downto 0);
 		 estado: out std_logic;
 		 opcode : out unsigned(3 downto 0) -- tamanho do opcode
@@ -67,17 +70,18 @@ architecture a_un_ctrl of un_ctrl is
 		estado <= estado_s;
 		opcode <= opcode_s;
 
-		end_mem_s <= data_out;
+        end_mem_s <= data_out;
 		opcode_s <= instr_s(17 downto 14); -- opcode nos 4 MSB
 		
 		jump_abs_en <= '1' when opcode_s = "1111" else
 					   '0';
 		
-		data_in <= data_out+1 when jump_abs_en='0' else
-				   instr_s(6 downto 0) when jump_abs_en='1' else -- endereco absoluto nos 7 LSB
-				   "0000000"; 
+        data_in <= end_mem_in when wr_end_mem = '1' else
+                instr_s(6 downto 0) when jump_abs_en='1' else -- endereco absoluto nos 7 LSB
+                data_out+1 when jump_abs_en='0' else
+                "0000000"; 
 		
-		wr_en <= '1' when estado_s = '1' else
+        wr_en <= '1' when estado_s = '1' else
 				 '0' when estado_s = '0' else
 				 '0'; -- 1->fetch, 0->decode/execute
 		
