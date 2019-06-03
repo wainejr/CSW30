@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity un_ctrl is
     port(clk : in std_logic;
-        rst : in std_logic;
+         rst : in std_logic;
          wr_end_mem : in std_logic; -- escrever endereço absoluto de memória
          end_mem_in : in unsigned(6 downto 0);
 
@@ -76,13 +76,11 @@ architecture a_un_ctrl of un_ctrl is
 		jump_abs_en <= '1' when opcode_s = "1111" else
 					   '0';
 		
-        data_in <= end_mem_in when wr_end_mem = '1' else
-                instr_s(6 downto 0) when jump_abs_en='1' else -- endereco absoluto nos 7 LSB
-                data_out+1 when jump_abs_en='0' else
-                "0000000"; 
+        data_in <= data_out+1 when wr_end_mem = '0' else
+                   end_mem_in; 
 		
         wr_en <= '1' when estado_s = '1' else
 				 '0' when estado_s = '0' else
-				 '0'; -- 1->fetch, 0->decode/execute
-		
+                 '0'; -- 1->fetch, 0->decode/execute
+
 end architecture;

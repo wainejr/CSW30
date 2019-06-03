@@ -6,27 +6,25 @@ entity ula is
     port (  entr0,entr1  : in signed (15 downto 0);
             sel_op : in unsigned (2 downto 0);
             saida : out signed (15 downto 0);
-            saida_bool : out std_logic
+            saida_flags : out unsigned (2 downto 0) -- Z (zero), N (negativo), C (carry)
     );
 end entity;
 
 -- codificacao - operacao (dados / booleana)
 -- 000 - soma ([0]+[1] / carry? 1 : 0)
 -- 001 - subtracao ([0]-[1] / carry? 1 : 0)
--- 010 - maior (nada / [0]>[1]? 1 : 0)
--- 011 - igual (nada / [0]==[1]? 1 : 0)
--- 100 - maior/igual (nada / [0]>=[1]? 1 : 0)
 -- 101 - shift left ([0]<<1 / carry? 1 : 0)
 -- 110 - shift right ([0]>>1 / carry? 1 : 0)
 -- 111 - segunda entrada ([1] / nada) (útil para cópia)
 architecture a_ula of ula is
     signal in_0, in_1, res: unsigned(16 downto 0);
-
+    signal saida_s: signed (15 downto 0);
 begin
 	in_0 <= '0' & unsigned(entr0);
 	in_1 <= '0' & unsigned(entr1);
-	
-	saida <= entr0+entr1 when sel_op = "000" else
+    saida <= saida_s;
+    
+	saida_s <= entr0+entr1 when sel_op = "000" else
              entr0-entr1 when sel_op = "001" else
              SHIFT_LEFT(entr0,1) when sel_op = "101" else
              SHIFT_RIGHT(entr0,1) when sel_op = "110" else
@@ -40,16 +38,11 @@ begin
            "00000000000000000";
 			 
 	
-    saida_bool <= '1' when sel_op = "010" and entr0 > entr1 else
-                  '0' when sel_op = "010" and entr0 <= entr1 else
-                  '1' when sel_op = "011" and entr0 = entr1 else
-                  '0' when sel_op = "011" and entr0 /= entr1 else
-                  '1' when sel_op = "100" and entr0 >= entr1 else
-                  '0' when sel_op = "100" and entr0 < entr1 else
-                  '1' when res(16) = '1' else
-				  '0';
-
-            
-                  
+    saida_flags(0) <= '1' when saida_s = "00000000000000000000" else
+                      '0'; -- Z
+    saida_flags(1) <= '1' when saida_s(15) = '1' else
+                      '0'; -- N
+    saida_flags(2) <= '1' when res(16) = '1' else
+                      '0'; -- C
 end architecture;
 

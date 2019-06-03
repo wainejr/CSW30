@@ -17,7 +17,7 @@ entity regbk_ula is
         mux_PC: in std_logic;
         -- saidas ULA
         saidapin : out signed (15 downto 0);
-        saida_bool : out std_logic;
+        saida_flags : out unsigned (2 downto 0);
         -- valores em reg0 e reg1
         data_reg0 : out signed (15 downto 0);
         data_reg1 : out signed (15 downto 0)
@@ -43,7 +43,7 @@ architecture a_regbk_ula of regbk_ula is
     port (  entr0,entr1  : in signed (15 downto 0);
             sel_op : in unsigned (2 downto 0);
             saida : out signed (15 downto 0);
-            saida_bool : out std_logic
+            saida_flags : out unsigned (2 downto 0)
     );
     end component;
     signal entr0, entr1: signed(15 downto 0);
@@ -66,7 +66,7 @@ architecture a_regbk_ula of regbk_ula is
                           entr1 => entr1,
                           saida => saida,
                           sel_op => sel_op,
-                          saida_bool => saida_bool
+                          saida_flags => saida_flags
                           );          
                           
         saidapin <= saida;

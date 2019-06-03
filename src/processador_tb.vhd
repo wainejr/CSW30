@@ -19,11 +19,13 @@ architecture a_processador_tb of processador_tb is
 			 data_reg1 : out signed (15 downto 0);
 			 -- saidas ULA
 			 saida_ula : out signed (15 downto 0);
-			 saida_ula_bool : out std_logic
+             flags : out unsigned (2 downto 0);
+             wr_en_flags : out unsigned (2 downto 0)
 		);
 	end component;
 	
-	signal clk, rst, estado, saida_ula_bool : std_logic;
+    signal clk, rst, estado : std_logic;
+    signal flags, wr_en_flags : unsigned (2 downto 0);
 	signal end_mem : unsigned(6 downto 0);
 	signal instr : unsigned(17 downto 0);
 	signal data_reg0, data_reg1, saida_ula : signed(15 downto 0);
@@ -38,7 +40,8 @@ architecture a_processador_tb of processador_tb is
 							data_reg0 => data_reg0,
 							data_reg1 => data_reg1,
 							saida_ula => saida_ula,
-							saida_ula_bool => saida_ula_bool
+                            flags => flags,
+                            wr_en_flags => wr_en_flags
 							);
 
 

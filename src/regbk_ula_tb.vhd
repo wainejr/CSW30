@@ -21,15 +21,15 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
             mux_const: in std_logic;
             -- saidas ULA
             saidapin : out signed (15 downto 0);
-            saida_bool : out std_logic;
+            saida_flags : out unsigned (2 downto 0);
             -- valores em reg0 e reg1
             data_reg0 : out signed (15 downto 0);
             data_reg1 : out signed (15 downto 0)
         );
     end component;
     
-    signal clk, rst, wr_en, saida_bool: std_logic;
-    signal mux_wr, mux_rd0, mux_rd1, sel_op: unsigned(2 downto 0);
+    signal clk, rst, wr_en: std_logic;
+    signal mux_wr, mux_rd0, mux_rd1, sel_op, saida_flags: unsigned(2 downto 0);
     signal data_in: signed(15 downto 0);
     signal saidapin: signed(15 downto 0);
     signal PC_in: unsigned(6 downto 0);
@@ -48,7 +48,7 @@ architecture a_regbk_ula_tb of regbk_ula_tb is
                                 data_in=>data_in,
                                 mux_const=>mux_const,
                                 saidapin=>saidapin,
-                                saida_bool=>saida_bool
+                                saida_flags=>saida_flags
                                );
                                
         process -- sinal de clock

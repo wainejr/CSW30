@@ -14,9 +14,6 @@ FLAGS:
 ESPECIFICAÇÃO DAS OPERAÇÕES DA ULA (ULA_func):
     000: soma ([0]+[1])
     001: subtracao ([0]-[1])
-    010: maior ([0]>[1]? 1 : 0) // desabilitar
-    011: igual ([0]==[1]? 1 : 0)  // desabilitar
-    100: maior/igual ([0]>=[1]? 1 : 0)  // desabilitar
     101: shift left ([0]<<1)
     110: shift right ([0]>>1)
     111: segunda entrada ([1]) (útil para cópia)
@@ -27,11 +24,11 @@ CÓDIGOS DE CONDIÇÃO (cc):
     0001: Z=1 (cc_Z  - Zero)
     0010: Z=0 (cc_NZ - Não Zero)
     0011: N=1 (cc_N  - Negativo)
-    0011: N=0 (cc_NN - Não negativo)
-    0100: C=1 (cc_C  - Carry)
-    0101: C=0 (cc_NC - Não carry)
-    0110: Z=1 (cc_E  - Igual)
-    0111: Z=1 (cc_NE - Não igual)
+    0100: N=0 (cc_NN - Não negativo)
+    0101: C=1 (cc_C  - Carry)
+    0110: C=0 (cc_NC - Não carry)
+    0111: Z=1 (cc_E  - Igual)
+    1000: Z=0 (cc_NE - Não igual)
     1001: C=1 (cc_ULT- Sem sinal menor que)
     1010: C|Z=1 (cc_ULE- Sem sinal menor que ou igual)
     1011: C=0   (cc_UGE- Sem sinal maior que ou igual)
@@ -47,18 +44,19 @@ FORMATOS DE INSTRUÇÃO
         Opcode = 0001 (Reg0 <= Reg0 (ULA_func) #8data)
 
     Formato de branch/jps com regs:
-        Opcode[17-14] ; Reg0 [13-11] ; cc [6-3] ; ULA_func[2-0]
-        ULA_func = 000
-        Opcode = 0100 -> se cc: PC <= PC + Reg0; senão: PC <= PC+1)
-        Opcode = 1100 -> se cc: PC <= Reg0; senão: PC <= PC+1)
-
+        Opcode[17-14] ; Reg0 [10-8] ; cc [6-3] ; ULA_func[2-0]
+        1. 	Opcode = 0100 -> se cc: PC <= PC + Reg0; senão: PC <= PC+1)
+			ULA_func = 000
+        2.	Opcode = 1100 -> se cc: PC <= Reg0; senão: PC <= PC+1)
+			ULA_func = 111
+			
     Formato do branch/jump com constante:
         Opcode[17-14] ; #7maddr [13-7] ; cc [6-3] ; ULA_func[2-0]
-        Opcode[17-14] ; #7maddr [6-0]
-        ULA_func = 000
-        Opcode = 0101 -> (se cc: PC <= PC+7maddr; senão: PC <= PC+1)
-        Opcode = 1101 -> (se cc: PC <= #7maddr; senão: PC <= PC+1)
 
+        1.	Opcode = 0101 -> (se cc: PC <= PC+7maddr; senão: PC <= PC+1)
+			ULA_func = 000
+		2.	Opcode = 1101 -> (se cc: PC <= #7maddr; senão: PC <= PC+1)
+			ULA_func = 111
 
 INSTRUÇÕES DA ISA UTILIZADAS:
     ADD Rw, Rw          (pg. 41)    (Ex.: 02B00 - Soma R5 com R3 e guarda em R5)
