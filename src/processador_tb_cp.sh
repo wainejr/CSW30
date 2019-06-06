@@ -11,4 +11,4 @@ ghdl -a un_ctrl.vhd
 ghdl -a uctrl_regbk.vhd
 ghdl -a processador_tb.vhd
 
-ghdl -r processador_tb --stop-time=3000ns --wave=processador_tb.ghw
+ghdl -r processador_tb --stop-time=100000ns --wave=processador_tb.ghw

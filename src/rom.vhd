@@ -16,14 +16,14 @@ architecture a_rom of rom is
     type mem is array (0 to 127) of unsigned(17 downto 0);
     constant conteudo_rom : mem := (
         -- caso endereco => conteudo
-        0 => "000101100000101000", -- Carrega R3 (o registrador 3) com o valor 5
-        1 => "000110000001000000", -- Carrega R4 com 8
-        2 => "000010100000000111", -- Copia R0 para R5 (zera R5)
-        3 => "000010101100000000", -- Soma R5 com R3 e guarda em R5
-        4 => "000010110000000000", -- Soma R5 com R4 e guarda em R5
-        5 => "000110100000001001", -- Subtrai um de R5 e guarda em R5
-        6 => "111100000000010100", -- Salta para endereço 20
-        7 => "000000000000000000",
+        0 => "000101100000000000", -- R3 <= 0
+        1 => "000110000000000000", -- R4 <= 0
+        2 => "000010001100000000", -- R4 <= R4+R3
+        3 => "000101100000001000", -- R3 <= R3+1
+        4 => "000000101100000111", -- R1 <= R3
+        5 => "000100100011110001", -- R1 <= R1-30
+        6 => "010111111000011000", -- Se cc_N (N=1), PC <= PC - 4 (p/ R4<=R4+R3)
+        7 => "000010110000000111", -- R5 <= R4
         8 => "000000000000000000",
         9 => "000000000000000000",
         10 =>"000000000000000000",
@@ -36,9 +36,8 @@ architecture a_rom of rom is
 		17 =>"000000000000000000", 
 		18 =>"000000000000000000",
         19 =>"000000000000000000",
-        20 =>"000001110100000111", -- Copia R5 para R3
-		21 =>"111100000000000010", -- Salta para a terceira instrução desta lista (R5 <= R3+R4)
-		
+        --20 =>"000001110100000111", -- Copia R5 para R3
+		--21 =>"111100000000000010", -- Salta para a terceira instrução desta lista (R5 <= R3+R4)
 		-- abaixo: casos omissos => (zero em todos os bits)
         others => (others=>'0')
     );

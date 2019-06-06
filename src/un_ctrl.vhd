@@ -81,6 +81,6 @@ architecture a_un_ctrl of un_ctrl is
 		
         wr_en <= '1' when estado_s = '1' else
 				 '0' when estado_s = '0' else
-                 '0'; -- 1->fetch, 0->decode/execute
+                 '0'; -- 0->fetch, 1->decode/execute
 
 end architecture;

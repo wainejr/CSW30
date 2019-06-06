@@ -72,6 +72,7 @@ architecture a_uctrl_regbk of uctrl_regbk is
     signal saida_flags_s : unsigned(2 downto 0);
     signal flags_s : unsigned(2 downto 0);
     signal wr_en_flags_s : unsigned(2 downto 0);
+	signal rst_wr_en : std_logic; -- reset write enable das flags (p n dar bug)
 
     signal end_mem_wr : unsigned(6 downto 0);
     
@@ -140,11 +141,26 @@ architecture a_uctrl_regbk of uctrl_regbk is
                     else '0';
         
         -- flags
-        wr_en_flags_s(0) <= '1' when opcode = "0000" or opcode = "0001" else
+		process(estado_s, rst, clk)
+		begin
+        if rst='1' then
+            rst_wr_en <= '1';
+		-- wr_en das flags desativado assincronamente e seu rst só é desativado para estado_s=1
+		elsif falling_edge(clk) then
+			rst_wr_en <= '1';
+		elsif rising_edge(estado_s) then 
+			rst_wr_en <= '0';
+        end if;
+		end process;
+		
+        wr_en_flags_s(0) <= '0' when rst_wr_en='1' else
+							'1' when opcode = "0000" or opcode = "0001" else
                             '0';
-        wr_en_flags_s(1) <= '1' when opcode = "0000" or opcode = "0001" else
+        wr_en_flags_s(1) <= '0' when rst_wr_en='1' else
+							'1' when opcode = "0000" or opcode = "0001" else
                             '0';
-        wr_en_flags_s(2) <= '1' when opcode = "0000" or opcode = "0001" else
+        wr_en_flags_s(2) <= '0' when rst_wr_en='1' else
+							'1' when opcode = "0000" or opcode = "0001" else
                             '0';
         flags_s(0) <= '0' when rst='1' else
                 saida_flags_s(0) when wr_en_flags_s(0) = '1' else
@@ -157,6 +173,7 @@ architecture a_uctrl_regbk of uctrl_regbk is
                 flags_s(2);
 
         -- branches
+		cc <= instr_s(6 downto 3);
         Z <= flags_s(0);
         N <= flags_s(1);
         C <= flags_s(2);
