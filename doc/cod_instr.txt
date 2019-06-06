@@ -64,4 +64,6 @@ INSTRUÇÕES DA ISA UTILIZADAS:
     SUB Rw, Rw          (pg. 125)   (Ex.: 02B01 - Subtrai R3 de R5 e guarda em R5)
     SUBB reg, #data8    (pg. 126)   (Ex.: 06809 - Subtrai um de R5 e guarda em R5)
     MOV Rw, Rw          (pg. 95)    (Ex.: 01D07 - Copia R5 para R3)
-    JMPA cc, caddr      (pg. 89)    (Ex.: 3C014 - Salta para endereço absoluto 20) cc=cc_UC (unconditional)
+    JMPA cc, caddr      (pf. 89)    (Ex.: 3418F - PC <= 3 se cc_Z)
+    JMPI cc, [Rw]       (pg. 90)    (Ex.: 30307 - PC <= R7 se cc_UC)
+    JMPR cc, rel        (pg. 91)    (Ex.: 34307 - PC <= PC+R7 se cc_UC)
