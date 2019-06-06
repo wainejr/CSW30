@@ -14,6 +14,7 @@ FLAGS:
 ESPECIFICAÇÃO DAS OPERAÇÕES DA ULA (ULA_func):
     000: soma ([0]+[1])
     001: subtracao ([0]-[1])
+    100: primeira entrada ([0])
     101: shift left ([0]<<1)
     110: shift right ([0]>>1)
     111: segunda entrada ([1]) (útil para cópia)
@@ -45,18 +46,27 @@ FORMATOS DE INSTRUÇÃO
 
     Formato de branch/jps com regs:
         Opcode[17-14] ; Reg0 [10-8] ; cc [6-3] ; ULA_func[2-0]
-        1. 	Opcode = 0100 -> se cc: PC <= PC + Reg0; senão: PC <= PC+1)
-			ULA_func = 000
-        2.	Opcode = 1100 -> se cc: PC <= Reg0; senão: PC <= PC+1)
-			ULA_func = 111
+        
+        Rel.: Opcode = 0100 -> se cc: PC <= PC + Reg0; senão: PC <= PC+1)
+			  ULA_func = 000
+        Abs.: Opcode = 1100 -> se cc: PC <= Reg0; senão: PC <= PC+1)
+			  ULA_func = 111
 			
     Formato do branch/jump com constante:
         Opcode[17-14] ; #7maddr [13-7] ; cc [6-3] ; ULA_func[2-0]
 
-        1.	Opcode = 0101 -> (se cc: PC <= PC+7maddr; senão: PC <= PC+1)
-			ULA_func = 000 
-		2.	Opcode = 1101 -> (se cc: PC <= #7maddr; senão: PC <= PC+1)
-			ULA_func = 111
+        Rel.: Opcode = 0101 -> (se cc: PC <= PC+7maddr; senão: PC <= PC+1)
+			  ULA_func = 000 
+		Abs.: Opcode = 1101 -> (se cc: PC <= #7maddr; senão: PC <= PC+1)
+			  ULA_func = 111
+	
+	Formado de leitura/escrita RAM:
+	    Opcode[17-14] ; Reg0 [13-11] ; Reg1 [10-8] ; ULA_func[2-0]
+	    
+	    LW: Opcode = 0010 -> Reg0 <= [Reg1]
+	        ULA_func = 111
+	    SW: Opcode = 0011 -> [Reg1] <= Reg0
+	        ULA_func = 100
 
 INSTRUÇÕES DA ISA UTILIZADAS:
     ADD Rw, Rw          (pg. 41)    (Ex.: 02B00 - Soma R5 com R3 e guarda em R5)
