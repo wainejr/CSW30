@@ -150,25 +150,25 @@ architecture a_uctrl_regbk of uctrl_regbk is
                     else '0';
         
         -- flags
-        --process(estado_s, rst, clk)
-        --begin
-        --if rst='1' then
-        --    rst_wr_en <= '1';
+        process(estado_s, rst, clk)
+        begin
+        if rst='1' then
+            rst_wr_en <= '1';
         -- wr_en das flags desativado assincronamente e seu rst só é desativado para estado_s=1
-        --elsif falling_edge(clk) then
-        --    rst_wr_en <= '1';
-        --elsif rising_edge(estado_s) then 
-        --    rst_wr_en <= '0';
-        --end if;
-        --end process;
+        elsif falling_edge(clk) then
+            rst_wr_en <= '1';
+        elsif rising_edge(estado_s) then 
+            rst_wr_en <= '0';
+        end if;
+        end process;
         
-        wr_en_flags_s(0) <= '0' when wr_en='1' else
+        wr_en_flags_s(0) <= '0' when rst_wr_en='1' else
                             '1' when opcode = "0000" or opcode = "0001" else
                             '0';
-        wr_en_flags_s(1) <= '0' when wr_en='1' else
+        wr_en_flags_s(1) <= '0' when rst_wr_en='1' else
                             '1' when opcode = "0000" or opcode = "0001" else
                             '0';
-        wr_en_flags_s(2) <= '0' when wr_en='1' else
+        wr_en_flags_s(2) <= '0' when rst_wr_en='1' else
                             '1' when opcode = "0000" or opcode = "0001" else
                             '0';
         flags_s(0) <= '0' when rst='1' else
