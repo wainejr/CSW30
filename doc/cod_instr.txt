@@ -48,25 +48,25 @@ FORMATOS DE INSTRUÇÃO
         Opcode[17-14] ; Reg0 [10-8] ; cc [6-3] ; ULA_func[2-0]
         
         Rel.: Opcode = 0100 -> se cc: PC <= PC + Reg0; senão: PC <= PC+1)
-			  ULA_func = 000
+              ULA_func = 000
         Abs.: Opcode = 1100 -> se cc: PC <= Reg0; senão: PC <= PC+1)
-			  ULA_func = 111
-			
+              ULA_func = 111
+            
     Formato do branch/jump com constante:
         Opcode[17-14] ; #7maddr [13-7] ; cc [6-3] ; ULA_func[2-0]
 
         Rel.: Opcode = 0101 -> (se cc: PC <= PC+7maddr; senão: PC <= PC+1)
-			  ULA_func = 000 
-		Abs.: Opcode = 1101 -> (se cc: PC <= #7maddr; senão: PC <= PC+1)
-			  ULA_func = 111
-	
-	Formado de leitura/escrita RAM:
-	    Opcode[17-14] ; Reg0 [13-11] ; Reg1 [10-8] ; ULA_func[2-0]
-	    
-	    LW: Opcode = 0010 -> Reg0 <= [Reg1]
-	        ULA_func = 111
-	    SW: Opcode = 0011 -> [Reg1] <= Reg0
-	        ULA_func = 100
+              ULA_func = 000 
+        Abs.: Opcode = 1101 -> (se cc: PC <= #7maddr; senão: PC <= PC+1)
+              ULA_func = 111
+    
+    Formado de leitura/escrita RAM:
+        Opcode[17-14] ; Reg0 [13-11] ; Reg1 [10-8] ; ULA_func[2-0]
+        
+        LW: Opcode = 0010 -> Reg0 <= [Reg1]
+            ULA_func = 111
+        SW: Opcode = 0011 -> [Reg1] <= Reg0
+            ULA_func = 100
 
 INSTRUÇÕES DA ISA UTILIZADAS:
     ADD Rw, Rw          (pg. 41)    (Ex.: 02B00 - Soma R5 com R3 e guarda em R5)

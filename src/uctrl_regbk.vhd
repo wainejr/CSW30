@@ -37,14 +37,15 @@ architecture a_uctrl_regbk of uctrl_regbk is
             clk : in std_logic;
             rst : in std_logic;
             wr_en : in std_logic;
+            wr_en_ram: in std_logic;
             mux_wr : in unsigned(2 downto 0);
             sel_op : in unsigned(2 downto 0);
             mux_rd0 : in unsigned(2 downto 0);
             mux_rd1 : in unsigned(2 downto 0);
-            data_in: in signed (15 downto 0);
-            mux_const: in std_logic;
             PC_in: in unsigned(6 downto 0);
             mux_PC: in std_logic;
+            data_in: in signed (15 downto 0);
+            mux_const: in unsigned(1 downto 0);
             -- saidas ULA
             saidapin : out signed (15 downto 0);
             saida_flags : out unsigned (2 downto 0);
@@ -55,11 +56,12 @@ architecture a_uctrl_regbk of uctrl_regbk is
     end component;
     
     signal opcode : unsigned(3 downto 0);
-    signal wr_en : std_logic;
+    signal wr_en, wr_en_ram : std_logic;
     signal sel_op : unsigned(2 downto 0);
     signal mux_rd0, mux_rd1 : unsigned(2 downto 0);
     signal data_in : signed (15 downto 0);
-    signal mux_const, mux_PC : std_logic;
+    signal mux_PC : std_logic;
+    signal mux_const : unsigned(1 downto 0);
      
     
     signal wr_end_mem_s : std_logic;
@@ -97,6 +99,7 @@ architecture a_uctrl_regbk of uctrl_regbk is
                         clk => clk,
                         rst => rst,
                         wr_en => wr_en,
+                        wr_en_ram => wr_en_ram,
                         mux_wr => mux_rd0, -- mux_wr é o mux_rd0
                         sel_op => sel_op,
                         mux_rd0 => mux_rd0, 
@@ -118,18 +121,24 @@ architecture a_uctrl_regbk of uctrl_regbk is
         flags <= flags_s;
         wr_en_flags <= wr_en_flags_s;
 
-        -- banco de registradores/ula
+        -- banco de registradores/ula/RAM
         wr_en <= '0' when estado_s = '0' else -- não escreve no estado 0
-                 '1' when opcode = "0000" or opcode = "0001" else
+                 '1' when opcode = "0000" or opcode = "0001" or
+                          opcode = "0010" else -- load word
                  '0';
-
+        wr_en_ram <= '0' when estado_s = '0' else
+                     '1' when opcode = "0011" else -- save word
+                     '0';
         mux_rd0 <= instr_s(13 downto 11);
         mux_rd1 <= instr_s(10 downto 8);
         sel_op <= instr_s(2 downto 0);
 
+
         -- entrada de constante na ULA
-        mux_const <= '1' when opcode = "0001" or opcode = "0101" or opcode = "1101"
-                    else '0';
+        mux_const <= "01" when opcode = "0001" or opcode = "0101" 
+                                or opcode = "1101" else
+                    "10" when opcode = "0010" else -- load word
+                    "00";
         data_in <=  resize(signed(instr_s(10 downto 3)), 16) 
                         when opcode = "0001" else
                     resize(signed(instr_s(13 downto 7)), 16) 

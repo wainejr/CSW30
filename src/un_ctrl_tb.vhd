@@ -24,8 +24,8 @@ architecture a_un_ctrl_tb of un_ctrl_tb is
     signal end_mem: unsigned (6 downto 0);
     signal instr: unsigned(17 downto 0);
 
-	
-	begin
+    
+    begin
         uctr: un_ctrl port map (clk=>clk,
                                rst=>rst,
                                wr_end_mem=>wr_end_mem,
@@ -49,7 +49,7 @@ architecture a_un_ctrl_tb of un_ctrl_tb is
                 wait;
         end process;
         
-		process -- teste (para escrever o end_mem o wr_en da maq de estados tem que ser 1)
+        process -- teste (para escrever o end_mem o wr_en da maq de estados tem que ser 1)
             begin
                 -- conta normal
                 wr_end_mem <= '0';
@@ -70,6 +70,6 @@ architecture a_un_ctrl_tb of un_ctrl_tb is
                 -- conta normal
                 wr_end_mem <= '0';
                 end_mem_in <= "0000000";
-				wait for 3000 ns;
-		end process;
+                wait for 3000 ns;
+        end process;
 end architecture;

@@ -23,25 +23,25 @@ architecture a_ula of ula is
     signal in_0, in_1, res: unsigned(16 downto 0);
     signal saida_s: signed (15 downto 0);
 begin
-	in_0 <= '0' & unsigned(entr0);
-	in_1 <= '0' & unsigned(entr1);
+    in_0 <= '0' & unsigned(entr0);
+    in_1 <= '0' & unsigned(entr1);
     saida <= saida_s;
     
-	saida_s <= entr0+entr1 when sel_op = "000" else
+    saida_s <= entr0+entr1 when sel_op = "000" else
              entr0-entr1 when sel_op = "001" else
              SHIFT_LEFT(entr0,1) when sel_op = "101" else
              SHIFT_RIGHT(entr0,1) when sel_op = "110" else
              entr1 when sel_op = "111" else
              entr0 when sel_op = "100" else
              "0000000000000000";
-	
-	res <= in_0+in_1 when sel_op = "000" else
+    
+    res <= in_0+in_1 when sel_op = "000" else
            in_0-in_1 when sel_op = "001" else
            SHIFT_LEFT(in_0,1) when sel_op = "101" else
            SHIFT_RIGHT(in_0,1) when sel_op = "110" else
            "00000000000000000";
-			 
-	
+             
+    
     saida_flags(0) <= '1' when saida_s = "00000000000000000000" else
                       '0'; -- Z
     saida_flags(1) <= '1' when saida_s(15) = '1' else

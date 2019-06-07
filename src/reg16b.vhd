@@ -4,10 +4,10 @@ use ieee.numeric_std.all;
 
 entity reg16b is
     port(clk : in std_logic;
-		rst : in std_logic;
-		wr_en : in std_logic;
-		data_in : in signed(15 downto 0);
-		data_out : out signed(15 downto 0)
+        rst : in std_logic;
+        wr_en : in std_logic;
+        data_in : in signed(15 downto 0);
+        data_out : out signed(15 downto 0)
     );
 end entity;
 
