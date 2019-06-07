@@ -3,36 +3,36 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity uctrl_regbk is
-	port(clk : in std_logic;
-		 rst : in std_logic;
-		 -- sinais unidade de controle (ROM, PC e estado)
-		 end_mem : out unsigned(6 downto 0);
-		 instr : out unsigned(17 downto 0);
-		 estado: out std_logic;
-		 -- sinais banco de registradores
-		 data_reg0 : out signed (15 downto 0);
-		 data_reg1 : out signed (15 downto 0);
-		 -- saidas ULA
-		 saida_ula : out signed (15 downto 0);
+    port(clk : in std_logic;
+         rst : in std_logic;
+         -- sinais unidade de controle (ROM, PC e estado)
+         end_mem : out unsigned(6 downto 0);
+         instr : out unsigned(17 downto 0);
+         estado: out std_logic;
+         -- sinais banco de registradores
+         data_reg0 : out signed (15 downto 0);
+         data_reg1 : out signed (15 downto 0);
+         -- saidas ULA
+         saida_ula : out signed (15 downto 0);
          flags : out unsigned (2 downto 0);
          wr_en_flags : out unsigned (2 downto 0)
-	);
+    );
 end entity;
 
 architecture a_uctrl_regbk of uctrl_regbk is
     component un_ctrl
-		port(clk : in std_logic;
-			 rst : in std_logic;
+        port(clk : in std_logic;
+             rst : in std_logic;
              wr_end_mem : in std_logic;
              end_mem_in : in unsigned(6 downto 0);
              end_mem : out unsigned(6 downto 0);
-			 instr : out unsigned(17 downto 0);
-			 estado: out std_logic;
-			 opcode : out unsigned(3 downto 0) -- tamanho do opcode
-			);
+             instr : out unsigned(17 downto 0);
+             estado: out std_logic;
+             opcode : out unsigned(3 downto 0) -- tamanho do opcode
+            );
     end component;
-	
-	component regbk_ula is 
+    
+    component regbk_ula is 
         port(
             clk : in std_logic;
             rst : in std_logic;
@@ -53,11 +53,11 @@ architecture a_uctrl_regbk of uctrl_regbk is
             data_reg1 : out signed (15 downto 0)
         );
     end component;
-	
-	signal opcode : unsigned(3 downto 0);
-	signal wr_en : std_logic;
-	signal sel_op : unsigned(2 downto 0);
-	signal mux_rd0, mux_rd1 : unsigned(2 downto 0);
+    
+    signal opcode : unsigned(3 downto 0);
+    signal wr_en : std_logic;
+    signal sel_op : unsigned(2 downto 0);
+    signal mux_rd0, mux_rd1 : unsigned(2 downto 0);
     signal data_in : signed (15 downto 0);
     signal mux_const, mux_PC : std_logic;
      
@@ -65,14 +65,14 @@ architecture a_uctrl_regbk of uctrl_regbk is
     signal wr_end_mem_s : std_logic;
     signal end_mem_in_s : unsigned(6 downto 0);
     signal end_mem_s : unsigned(6 downto 0);
-	signal instr_s : unsigned(17 downto 0);
+    signal instr_s : unsigned(17 downto 0);
     signal estado_s : std_logic;
     
     signal saida_ula_s : signed (15 downto 0);
     signal saida_flags_s : unsigned(2 downto 0);
     signal flags_s : unsigned(2 downto 0);
     signal wr_en_flags_s : unsigned(2 downto 0);
-	signal rst_wr_en : std_logic; -- reset write enable das flags (p n dar bug)
+    signal rst_wr_en : std_logic; -- reset write enable das flags (p n dar bug)
 
     signal end_mem_wr : unsigned(6 downto 0);
     
@@ -81,34 +81,34 @@ architecture a_uctrl_regbk of uctrl_regbk is
     signal Z, N, C :  std_logic;
     signal cc : unsigned(3 downto 0);
 
-	begin 
-		ctrl: un_ctrl port map(
-						clk => clk,
+    begin 
+        ctrl: un_ctrl port map(
+                        clk => clk,
                         rst => rst,
                         wr_end_mem => wr_end_mem_s,
                         end_mem_in => end_mem_in_s,
-						end_mem => end_mem_s,
-						instr => instr_s,
-						estado => estado_s,
-						opcode => opcode
-		);
-		
-		rg_ula: regbk_ula port map(
-						clk => clk,
-						rst => rst,
-						wr_en => wr_en,
-						mux_wr => mux_rd0, -- mux_wr é o mux_rd0
-						sel_op => sel_op,
-						mux_rd0 => mux_rd0, 
-						mux_rd1 => mux_rd1,
-						data_in => data_in,
+                        end_mem => end_mem_s,
+                        instr => instr_s,
+                        estado => estado_s,
+                        opcode => opcode
+        );
+        
+        rg_ula: regbk_ula port map(
+                        clk => clk,
+                        rst => rst,
+                        wr_en => wr_en,
+                        mux_wr => mux_rd0, -- mux_wr é o mux_rd0
+                        sel_op => sel_op,
+                        mux_rd0 => mux_rd0, 
+                        mux_rd1 => mux_rd1,
+                        data_in => data_in,
                         mux_const => mux_const,
                         PC_in => end_mem_s,
                         mux_PC => mux_PC,
-						saidapin => saida_ula_s,
-						saida_flags => saida_flags_s,
-						data_reg0 => data_reg0,
-						data_reg1 => data_reg1
+                        saidapin => saida_ula_s,
+                        saida_flags => saida_flags_s,
+                        data_reg0 => data_reg0,
+                        data_reg1 => data_reg1
         );
 
         end_mem <= end_mem_s;
@@ -123,9 +123,9 @@ architecture a_uctrl_regbk of uctrl_regbk is
                  '1' when opcode = "0000" or opcode = "0001" else
                  '0';
 
-		mux_rd0 <= instr_s(13 downto 11);
-		mux_rd1 <= instr_s(10 downto 8);
-		sel_op <= instr_s(2 downto 0);
+        mux_rd0 <= instr_s(13 downto 11);
+        mux_rd1 <= instr_s(10 downto 8);
+        sel_op <= instr_s(2 downto 0);
 
         -- entrada de constante na ULA
         mux_const <= '1' when opcode = "0001" or opcode = "0101" or opcode = "1101"
@@ -141,26 +141,26 @@ architecture a_uctrl_regbk of uctrl_regbk is
                     else '0';
         
         -- flags
-		process(estado_s, rst, clk)
-		begin
-        if rst='1' then
-            rst_wr_en <= '1';
-		-- wr_en das flags desativado assincronamente e seu rst só é desativado para estado_s=1
-		elsif falling_edge(clk) then
-			rst_wr_en <= '1';
-		elsif rising_edge(estado_s) then 
-			rst_wr_en <= '0';
-        end if;
-		end process;
-		
-        wr_en_flags_s(0) <= '0' when rst_wr_en='1' else
-							'1' when opcode = "0000" or opcode = "0001" else
+        --process(estado_s, rst, clk)
+        --begin
+        --if rst='1' then
+        --    rst_wr_en <= '1';
+        -- wr_en das flags desativado assincronamente e seu rst só é desativado para estado_s=1
+        --elsif falling_edge(clk) then
+        --    rst_wr_en <= '1';
+        --elsif rising_edge(estado_s) then 
+        --    rst_wr_en <= '0';
+        --end if;
+        --end process;
+        
+        wr_en_flags_s(0) <= '0' when wr_en='1' else
+                            '1' when opcode = "0000" or opcode = "0001" else
                             '0';
-        wr_en_flags_s(1) <= '0' when rst_wr_en='1' else
-							'1' when opcode = "0000" or opcode = "0001" else
+        wr_en_flags_s(1) <= '0' when wr_en='1' else
+                            '1' when opcode = "0000" or opcode = "0001" else
                             '0';
-        wr_en_flags_s(2) <= '0' when rst_wr_en='1' else
-							'1' when opcode = "0000" or opcode = "0001" else
+        wr_en_flags_s(2) <= '0' when wr_en='1' else
+                            '1' when opcode = "0000" or opcode = "0001" else
                             '0';
         flags_s(0) <= '0' when rst='1' else
                 saida_flags_s(0) when wr_en_flags_s(0) = '1' else
@@ -173,7 +173,7 @@ architecture a_uctrl_regbk of uctrl_regbk is
                 flags_s(2);
 
         -- branches
-		cc <= instr_s(6 downto 3);
+        cc <= instr_s(6 downto 3);
         Z <= flags_s(0);
         N <= flags_s(1);
         C <= flags_s(2);

@@ -10,12 +10,15 @@ entity ula is
     );
 end entity;
 
--- codificacao - operacao (dados / booleana)
--- 000 - soma ([0]+[1] / carry? 1 : 0)
--- 001 - subtracao ([0]-[1] / carry? 1 : 0)
--- 101 - shift left ([0]<<1 / carry? 1 : 0)
--- 110 - shift right ([0]>>1 / carry? 1 : 0)
--- 111 - segunda entrada ([1] / nada) (útil para cópia)
+-- codificacao - operacao (dados)
+-- 000 - soma ([0]+[1])
+-- 001 - subtracao ([0]-[1])
+-- 100 - primeira entrada ([0])
+-- 101 - shift left ([0]<<1)
+-- 110 - shift right ([0]>>1)
+-- 111 - segunda entrada ([1]) (útil para cópia)
+-- Flags - Z: saida=0; N: MSB=1; C: carry
+
 architecture a_ula of ula is
     signal in_0, in_1, res: unsigned(16 downto 0);
     signal saida_s: signed (15 downto 0);
@@ -28,7 +31,8 @@ begin
              entr0-entr1 when sel_op = "001" else
              SHIFT_LEFT(entr0,1) when sel_op = "101" else
              SHIFT_RIGHT(entr0,1) when sel_op = "110" else
-			 entr1 when sel_op = "111" else
+             entr1 when sel_op = "111" else
+             entr0 when sel_op = "100" else
              "0000000000000000";
 	
 	res <= in_0+in_1 when sel_op = "000" else
