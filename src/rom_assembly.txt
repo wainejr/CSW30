@@ -1,0 +1,36 @@
+            -- caso endereco => conteudo
+	    	-- Crivo de eratostenes: 1 indica primo, 0 não primo
+	    	-- R1: contador memória / numero atual
+	    	-- R2: cte (1 e dps 0)
+		    -- R3: acumulador
+	    	-- R7: auxiliar checagem (flags)
+            ADDB $R1, 0
+            ADDB $R2, 1
+inicial:    MOV [$R1], $R2
+            ADD $R1, 1
+            MOV $R7, $R1
+            SUBB $R7, 33
+            JMPR cc_NZ, inicial
+        
+            ADDB $R1, 1
+            ADDB $R2, 0
+            
+contador:   ADDB $R1, 1
+            MOV $R7, $R1
+            SUBB $R7, 32
+            JMPA cc_Z, final
+            MOV $R3, $R1
+            MOV $R7, [$R3]
+            MOV $R7, $R7
+            JMPA cc_Z, contador
+elimina:    ADD $R3, $R1
+            MOV $R7, $R3
+            SUBB $R7, 33
+            JMPR cc_NN, contador
+            MOV [$R3], $R2
+            JMPR cc_N, elimina
+            JMPA cc_UC, contador
+
+final:      JMPA cc_UC, final
+        
+        
