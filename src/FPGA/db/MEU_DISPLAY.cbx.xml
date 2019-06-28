@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="MEU_DISPLAY">
+		<CBX_INST_ENTRY INSTANCE_NAME="|MikroP|uctrl_regbk:ctrb|un_ctrl:ctrl|rom:mem_rom|altsyncram:Mux17_rtl_0" CBX_FILE_NAME="altsyncram_1rv.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

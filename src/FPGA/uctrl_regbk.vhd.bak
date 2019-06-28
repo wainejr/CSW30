@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity uctrl_regbk is
-    port(clk : in std_logic;
-         rst : in std_logic;
+    port(clk   : in std_logic;
+         rst   : in std_logic;
          -- sinais unidade de controle (ROM, PC e estado)
          end_mem : out unsigned(6 downto 0);
          instr : out unsigned(17 downto 0);
@@ -15,8 +15,10 @@ entity uctrl_regbk is
          -- saidas ULA
          saida_ula : out signed (15 downto 0);
          flags : out unsigned (2 downto 0);
-         wr_en_flags : out unsigned (2 downto 0)
-    );
+         wr_en_flags : out unsigned (2 downto 0);
+         -- saída p/ display
+         saida_display : out unsigned(15 downto 0)
+         );
 end entity;
 
 architecture a_uctrl_regbk of uctrl_regbk is
@@ -51,7 +53,8 @@ architecture a_uctrl_regbk of uctrl_regbk is
             saida_flags : out unsigned (2 downto 0);
             -- valores em reg0 e reg1
             data_reg0 : out signed (15 downto 0);
-            data_reg1 : out signed (15 downto 0)
+            data_reg1 : out signed (15 downto 0);
+            saida_display : out unsigned(15 downto 0)
         );
     end component;
     
@@ -62,7 +65,7 @@ architecture a_uctrl_regbk of uctrl_regbk is
     signal data_in : signed (15 downto 0);
     signal mux_PC : std_logic;
     signal mux_const : unsigned(1 downto 0);
-     
+    
     
     signal wr_end_mem_s : std_logic;
     signal end_mem_in_s : unsigned(6 downto 0);
@@ -111,7 +114,8 @@ architecture a_uctrl_regbk of uctrl_regbk is
                         saidapin => saida_ula_s,
                         saida_flags => saida_flags_s,
                         data_reg0 => data_reg0,
-                        data_reg1 => data_reg1
+                        data_reg1 => data_reg1,
+                        saida_display => saida_display
         );
 
         end_mem <= end_mem_s;
@@ -163,7 +167,7 @@ architecture a_uctrl_regbk of uctrl_regbk is
         end process;
         
         wr_en_flags_s <= "000" when rst_wr_en='1' else
-                         "111" when opcode = "0000" or opcode = "0001" 
+                        "111" when opcode = "0000" or opcode = "0001" 
                                   or opcode = "0010" or opcode = "0011" else
                         "000";
 

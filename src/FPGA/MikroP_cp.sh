@@ -11,5 +11,6 @@ ghdl -a rom.vhd
 ghdl -a un_ctrl.vhd
 ghdl -a uctrl_regbk.vhd
 ghdl -a processador_tb.vhd
-
-ghdl -r processador_tb --stop-time=300us --wave=processador_tb.ghw
+ghdl -a Hex.vhd
+ghdl -a disp.vhd
+ghdl -a MikroP.vhd

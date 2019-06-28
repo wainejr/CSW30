@@ -1,2 +1,5 @@
 *.cf
 *.obj
+src/FPGA/incremental_db/*
+src/FPGA/output_files/*
+src/FPGA/simulations/*
