@@ -82,7 +82,7 @@ architecture a_disp of disp is
                     contador <= 0;
                 else
                     if turbo = '1' then 
-                        contador <= contador + 50; -- 100 vezes mais rápido (1kHz)
+                        contador <= contador + 20;
                         clk_div <= '0';
                     else
                         contador <= contador + 1;
